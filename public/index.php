@@ -1,15 +1,20 @@
 <?php
+session_start();
+require_once '../controller/admin/ProductAdminController.php';
 $action = isset($_GET['act']) ? $_GET['act'] : 'index';
-
+$productAdmin = new ProductAdminController();
 switch ($action) {
     case 'admin':
         include '../view/admin/index.php';
         break;
     case 'product':
-        include '../view/admin/product/list.php';
+        $productAdmin->index();
+        break;
+    case 'product_store':
+        $productAdmin->store();
         break;
     case 'product_create':
-        include '../view/admin/product/create.php';
+        $productAdmin->create();
         break;
     case 'product_edit':
         include '../view/admin/product/edit.php';
