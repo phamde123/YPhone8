@@ -94,8 +94,8 @@ class ProductAdminController extends Product
                         }
                     }
                 }
-                $_SESSION['succes'] = 'Thêm sản phẩm thành công';
-                header('location:?act=product');
+                $_SESSION['success'] = 'Thêm sản phẩm thành công';
+                header('location:index.php?act=product');
                 exit();
             }else{
                 $_SESSION['error'] = 'Thêm sản phẩm thất bại ';
