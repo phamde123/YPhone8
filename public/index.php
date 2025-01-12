@@ -1,7 +1,9 @@
 <?php
 session_start();
+require_once '../controller/admin/CategoryAdminController.php';
 require_once '../controller/admin/ProductAdminController.php';
 $action = isset($_GET['act']) ? $_GET['act'] : 'index';
+$categoryAdmin = new CategoryAdminController();
 $productAdmin = new ProductAdminController();
 switch ($action) {
     case 'admin':
@@ -19,14 +21,20 @@ switch ($action) {
     case 'product_edit':
         include '../view/admin/product/edit.php';
         break;
+
+        // ==================================================================================================//
+
     case 'category':
-        include '../view/admin/category/list.php';
+        $categoryAdmin->index();
         break;
     case 'category_create':
-        include '../view/admin/category/create.php';
+        $categoryAdmin->addCategory();
         break;
     case 'category_edit':
-        include '../view/admin/category/edit.php';
+        $categoryAdmin->updateCategory();
+        break;
+    case 'category_delete':
+        $categoryAdmin->deleteCategory();
         break;
 
         // ==================================================================================================//

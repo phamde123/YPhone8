@@ -1,6 +1,6 @@
 <?php
 
-require_once '../modle/product.php';
+require_once '../model/product.php';
 class ProductAdminController extends Product
 {
     public function index()
