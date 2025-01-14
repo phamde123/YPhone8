@@ -3,286 +3,271 @@
 
     <!-- Start Container Fluid -->
     <div class="container-xxl">
-
-        <div class="row">
-            <div class="col-xl-3 col-lg-4">
-                <div class="card">
-                    <div class="card-body">
-                        <img src="admin/assets_admin/images/product/p-1.png" alt="" class="img-fluid rounded bg-light">
-                        <div class="mt-3">
-                            <h4>Men Black Slim Fit T-shirt <span class="fs-14 text-muted ms-1">(Fashion)</span></h4>
-                            <h5 class="text-dark fw-medium mt-3">Price :</h5>
-                            <h4 class="fw-semibold text-dark mt-2 d-flex align-items-center gap-2">
-                                <span class="text-muted text-decoration-line-through">$100</span> $80 <small class="text-muted"> (30% Off)</small>
-                            </h4>
-                            <div class="mt-3">
-                                <h5 class="text-dark fw-medium">Size :</h5>
-                                <div class="d-flex flex-wrap gap-2" role="group" aria-label="Basic checkbox toggle button group">
-                                    <input type="checkbox" class="btn-check" id="size-s">
-                                    <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="size-s">S</label>
-
-                                    <input type="checkbox" class="btn-check" id="size-m" checked>
-                                    <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="size-m">M</label>
-
-                                    <input type="checkbox" class="btn-check" id="size-xl">
-                                    <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="size-xl">Xl</label>
-
-                                    <input type="checkbox" class="btn-check" id="size-xxl">
-                                    <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="size-xxl">XXL</label>
-
+        <form action="index.php?act=product_update&id=<?= $product['pro_id'] ?>" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-xl-12 col-lg-8 ">
+                    <input type="hidden" name="pro_id" value="<?= $product['pro_id']?>">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Thêm ảnh sản phẩm</h4>
+                        </div>
+                        <div class="card-body">
+                            <?php foreach ($gallery as $value) { ?>
+                                <img src="./images/gallery_product/<?= $value['image'] ?>" alt="" width="150px">
+                                <input type="file" hidden name="old_gallery_image[]" value="<?= $value['image'] ?>" id="" class="form-control" multiple>
+                            <?php } ?>
+                            <input type="file" name="gallery_image[]" id="" class="form-control" multiple>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Thông tin sản phẩm </h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="product_name" class="form-label">Tên sản phẩm</label>
+                                        <input type="text" id="product_name" class="form-control" name="name" onkeyup="ChangeToSlug();" value="<?= $product['pro_name'] ?>"
+                                            placeholder="Nhập tên sản phẩm">
+                                    </div>
+                                    <?php if (isset($_SESSION['errors']['name'])) { ?>
+                                        <p class="text-danger"><?= $_SESSION['errors']['name'] ?></p>
+                                    <?php } ?>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="product-categories" class="form-label">Danh mục</label>
+                                    <select class="form-control" id="product-categories" data-choices data-choices-groups
+                                        data-placeholder="Chọn danh mục" name="cate_id">
+                                        <?php foreach ($listCategory as $cate) { ?>
+                                            <option value="<?= $cate['cate_id'] ?>" <?= $product['cate_id'] == $cate['cate_id'] ? 'selected' : '' ?>><?= $cate['name'] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Ảnh sản phẩm</label><br>
+                                        <img src="./images/product/<?= $product['pro_image'] ?>" alt="" width="200px" class="mb-2">
+                                        <input type="file" name="product_image" id="" class="form-control">
+                                        <input type="hidden" name="pro_old_image" value="<?= $product['pro_image'] ?>">
+                                    </div>
+                                    <?php if (isset($_SESSION['errors']['product_image'])) { ?>
+                                        <p class="text-danger"><?= $_SESSION['errors']['product_image'] ?></p>
+                                    <?php } ?>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Đường dẫn</label>
+                                        <input type="text" name="slug" id="slug" class="form-control" value="<?= $product['pro_slug'] ?>">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="product-name" class="form-label">Giá sản phẩm</label>
+                                        <input type="text" id="product-name" class="form-control" name="price" value="<?= $product['pro_price'] ?>"
+                                            placeholder="Nhập giá sản phẩm">
+                                    </div>
+                                    <?php if (isset($_SESSION['errors']['price'])) { ?>
+                                        <p class="text-danger"><?= $_SESSION['errors']['price'] ?></p>
+                                    <?php } ?>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-3">
+                                        <label for="product-name" class="form-label">Giá khuyến mãi</label>
+                                        <input type="text" id="product-name" class="form-control" name="sale_price" value="<?= $product['pro_sale_price'] ?>"
+                                            placeholder="Nhập giá khuyến mãi sản phẩm">
+                                    </div>
+                                    <?php if (isset($_SESSION['errors']['sale_price'])) { ?>
+                                        <p class="text-danger"><?= $_SESSION['errors']['sale_price'] ?></p>
+                                    <?php } ?>
                                 </div>
                             </div>
-                            <div class="mt-3">
-                                <h5 class="text-dark fw-medium">Colors :</h5>
-                                <div class="d-flex flex-wrap gap-2" role="group" aria-label="Basic checkbox toggle button group">
-                                    <input type="checkbox" class="btn-check" id="color-dark">
-                                    <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-dark"> <i class="bx bxs-circle fs-18 text-dark"></i></label>
 
-                                    <input type="checkbox" class="btn-check" id="color-yellow">
-                                    <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-yellow"> <i class="bx bxs-circle fs-18 text-warning"></i></label>
+                            <!----------------------------------------- Biến thể sản phẩm -------------------------------------------->
+                            <div id="variants">
+                                <?php foreach ($varients as $key => $value) { ?>
+                                    <div class="row mb-4 border rounded px-3">
+                                        <div class="col-lg-4">
+                                            <div class="mt-3">
+                                                <input type="hidden" name="variant_id[]" value="<?= $value['var_id'] ?>" id="">
+                                                <h5 class="text-dark fw-medium">Kích thước :</h5>
+                                                <div class="d-flex flex-wrap gap-2" role="group"
+                                                    aria-label="Basic checkbox toggle button group">
+                                                    <?php foreach ($listSize as $size) { ?>
+                                                        <input type="checkbox" class="btn-check" id="size-<?= $size['var_size_id'] ?>-<?= $key ?>" name="variant_size[]" value="<?= $size['var_size_id'] ?>" <?= $value['var_size_id'] == $size['var_size_id'] ? 'checked' : '' ?>>
+                                                        <label
+                                                            class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" style="width: 50px;"
+                                                            for="size-<?= $size['var_size_id'] ?>-<?= $key ?>"><?= $size['name'] ?></label>
+                                                    <?php } ?>
+                                                </div>
+                                                <?php if (isset($_SESSION['errors']['variant_size'])) { ?>
+                                                    <p class="text-danger"><?= $_SESSION['errors']['variant_size'] ?></p>
+                                                <?php } ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <div class="mt-3">
+                                                <h5 class="text-dark fw-medium">Màu sắc :</h5>
+                                                <div class="d-flex flex-wrap gap-2" role="group"
+                                                    aria-label="Basic checkbox toggle button group">
+                                                    <?php foreach ($listColor as $color) { ?>
+                                                        <input type="checkbox" class="btn-check" id="color-<?= $color['var_color_id'] ?>-<?= $key ?>" name="variant_color[]" value="<?= $color['var_color_id'] ?>" <?= $value['var_color_id'] == $color['var_color_id'] ? 'checked' : '' ?>>
+                                                        <label
+                                                            class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center"
+                                                            for="color-<?= $color['var_color_id'] ?>-<?= $key ?>"> <i class="bx bxs-circle fs-18" style="color: <?= $color['code'] ?>;"></i></label>
+                                                    <?php } ?>
+                                                </div>
+                                                <?php if (isset($_SESSION['errors']['variant_coller'])) { ?>
+                                                    <p class="text-danger"><?= $_SESSION['errors']['variant_coller'] ?></p>
+                                                <?php } ?>
+                                            </div>
+                                        </div>
 
-                                    <input type="checkbox" class="btn-check" id="color-white">
-                                    <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-white"> <i class="bx bxs-circle fs-18 text-white"></i></label>
+                                        <div class="col-lg-4">
+                                            <div class="mt-3 mb-3">
+                                                <label for="variant_sale_price" class="form-label">Giá biến thể</label>
+                                                <input type="text" id="variant_price" class="form-control" name="variant_price[]" value="<?= $value['var_price'] ?>"
+                                                    placeholder="Nhập giá sản phẩm">
+                                            </div>
+                                            <?php if (isset($_SESSION['errors']['variant_price'])) { ?>
+                                                <?php foreach ($_SESSION['errors']['variant_price'] as $variant_price) { ?>
+                                                    <p class="text-danger"><?= $variant_price ?></p>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mt-3  mb-3">
+                                                <label for="variant_sale_price" class="form-label">Giá khuyến mãi biến thể</label>
+                                                <input type="text" id="variant_sale_price" class="form-control" name="variant_sale_price[]" value="<?= $value['var_sale_price'] ?>"
+                                                    placeholder="Nhập giá khuyến mãi sản phẩm">
+                                            </div>
+                                            <?php if (isset($_SESSION['errors']['variant_sale_price'])) { ?>
+                                                <?php foreach ($_SESSION['errors']['variant_sale_price'] as $variant_sale_price) { ?>
+                                                    <p class="text-danger"><?= $variant_sale_price ?></p>
+                                                <?php } ?>
+                                            <?php } ?>
 
-                                    <input type="checkbox" class="btn-check" id="color-red">
-                                    <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-red"> <i class="bx bxs-circle fs-18 text-danger"></i></label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mt-3  mb-3">
+                                                <label for="variant_quantity" class="form-label">Số lượng</label>
+                                                <input type="text" id="variant_quantity" class="form-control" name="variant_quantity[]" value="<?= $value['var_quantity'] ?>"
+                                                    placeholder="Nhập giá khuyến mãi sản phẩm">
+                                            </div>
+                                            <?php if (isset($_SESSION['errors']['variant_quantity'])) { ?>
+                                                <?php foreach ($_SESSION['errors']['variant_quantity'] as $variant_quantity) { ?>
+                                                    <p class="text-danger"><?= $variant_quantity ?></p>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </div>
 
+                                    </div>
+                                <?php } ?>
+                            </div>
+                            <div class="rounded">
+                                <div class="row justify-content-end g-2">
+                                    <div class="col-lg-2">
+                                        <button type="button" id="add-variant" class="btn btn-primary w-100">Thêm biến thể</button>
+                                    </div>
                                 </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label">Mô tả</label>
+                                        <textarea class="form-control bg-light-subtle" id="description" rows="7" name="description" placeholder="Nhập mô tả của sản phẩm"><?= $product['pro_description'] ?></textarea>
+                                    </div>
+                                    <?php if (isset($_SESSION['errors']['description'])) { ?>
+                                        <p class="text-danger"><?= $_SESSION['errors']['description'] ?></p>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-light mb-3 rounded">
+                        <div class="row justify-content-end g-2">
+                            <div class="col-lg-2">
+                                <button type="submit" name="update_product" class="btn btn-outline-secondary w-100">Cập nhập sản phẩm</button>
+                            </div>
+                            <div class="col-lg-2">
+                                <a href="?act=product" class="btn btn-primary w-100">Quay lại</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="col-xl-9 col-lg-8 ">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Add Product Photo</h4>
-                    </div>
-                    <div class="card-body">
-                        <!-- File Upload -->
-                        <form action="https://techzaa.in/" method="post" class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews" data-upload-preview-template="#uploadPreviewTemplate">
-                            <div class="fallback">
-                                <input name="file" type="file" multiple />
-                            </div>
-                            <div class="dz-message needsclick">
-                                <i class="bx bx-cloud-upload fs-48 text-primary"></i>
-                                <h3 class="mt-4">Drop your images here, or <span class="text-primary">click to browse</span></h3>
-                                <span class="text-muted fs-13">
-                                    1600 x 1200 (4:3) recommended. PNG, JPG and GIF files are allowed
-                                </span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Product Information</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="product-name" class="form-label">Product Name</label>
-                                        <input type="text" id="product-name" class="form-control" placeholder="Items Name" value="Men Black Slim Fit T-shirt">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-lg-6">
-                                <form>
-                                    <label for="product-categories" class="form-label">Product Categories</label>
-                                    <select class="form-control" id="product-categories" data-choices data-choices-groups data-placeholder="Select Categories" name="choices-single-groups">
-                                        <option value="">Choose a categories</option>
-                                        <option value="Fashion" selected>Fashion</option>
-                                        <option value="Electronics">Electronics</option>
-                                        <option value="Footwear">Footwear</option>
-                                        <option value="Sportswear">Sportswear</option>
-                                        <option value="Watches">Watches</option>
-                                        <option value="Furniture">Furniture</option>
-                                        <option value="Appliances">Appliances</option>
-                                        <option value="Headphones">Headphones</option>
-                                        <option value="Other Accessories">Other Accessories</option>
-                                    </select>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="product-brand" class="form-label">Brand</label>
-                                        <input type="text" id="product-brand" class="form-control" placeholder="Brand Name" value="Larkon Fashion">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-lg-4">
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="product-weight" class="form-label">Weight</label>
-                                        <input type="text" id="product-weight" class="form-control" placeholder="In gm & kg" value="300gm">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-lg-4">
-                                <form>
-                                    <label for="gender" class="form-label">Gender</label>
-                                    <select class="form-control" id="gender" data-choices data-choices-groups data-placeholder="Select Gender">
-                                        <option value="">Select Gender</option>
-                                        <option value="Men" selected>Men</option>
-                                        <option value="Women">Women</option>
-                                        <option value="Other">Other</option>
-                                    </select>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col-lg-4">
-                                <div class="mt-3">
-                                    <h5 class="text-dark fw-medium">Size :</h5>
-                                    <div class="d-flex flex-wrap gap-2" role="group" aria-label="Basic checkbox toggle button group">
-                                        <input type="checkbox" class="btn-check" id="size-xs1">
-                                        <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="size-xs1">XS</label>
-
-                                        <input type="checkbox" class="btn-check" id="size-s1" checked>
-                                        <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="size-s1">S</label>
-
-                                        <input type="checkbox" class="btn-check" id="size-m1" checked>
-                                        <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="size-m1">M</label>
-
-                                        <input type="checkbox" class="btn-check" id="size-xl1" checked>
-                                        <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="size-xl1">Xl</label>
-
-                                        <input type="checkbox" class="btn-check" id="size-xxl1" checked>
-                                        <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="size-xxl1">XXL</label>
-                                        <input type="checkbox" class="btn-check" id="size-3xl1">
-                                        <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="size-3xl1">3XL</label>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-5">
-                                <div class="mt-3">
-                                    <h5 class="text-dark fw-medium">Colors :</h5>
-                                    <div class="d-flex flex-wrap gap-2" role="group" aria-label="Basic checkbox toggle button group">
-                                        <input type="checkbox" class="btn-check" id="color-dark1" checked>
-                                        <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-dark1"> <i class="bx bxs-circle fs-18 text-dark"></i></label>
-
-                                        <input type="checkbox" class="btn-check" id="color-yellow1" checked>
-                                        <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-yellow1"> <i class="bx bxs-circle fs-18 text-warning"></i></label>
-
-                                        <input type="checkbox" class="btn-check" id="color-white1" checked>
-                                        <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-white1"> <i class="bx bxs-circle fs-18 text-white"></i></label>
-
-                                        <input type="checkbox" class="btn-check" id="color-red1" checked>
-                                        <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-red1"> <i class="bx bxs-circle fs-18 text-primary"></i></label>
-
-                                        <input type="checkbox" class="btn-check" id="color-green1">
-                                        <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-green1"> <i class="bx bxs-circle fs-18 text-success"></i></label>
-
-                                        <input type="checkbox" class="btn-check" id="color-blue1">
-                                        <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-blue1"> <i class="bx bxs-circle fs-18 text-danger"></i></label>
-
-                                        <input type="checkbox" class="btn-check" id="color-sky1">
-                                        <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-sky1"> <i class="bx bxs-circle fs-18 text-info"></i></label>
-
-                                        <input type="checkbox" class="btn-check" id="color-gray1">
-                                        <label class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" for="color-gray1"> <i class="bx bxs-circle fs-18 text-secondary"></i></label>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="mb-3">
-                                    <label for="description" class="form-label">Description</label>
-                                    <textarea class="form-control bg-light-subtle" id="description" rows="7" placeholder="Short description about the product">Top in sweatshirt fabric made from a cotton blend with a soft brushed inside. Relaxed fit with dropped shoulders, long sleeves and ribbing around the neckline, cuffs and hem. Small metal text applique.</textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="product-id" class="form-label">Tag Number</label>
-                                        <input type="number" id="product-id" class="form-control" placeholder="#******" value="36294007">
-                                    </div>
-
-                                </form>
-                            </div>
-                            <div class="col-lg-4">
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="product-stock" class="form-label">Stock</label>
-                                        <input type="number" id="product-stock" class="form-control" placeholder="Quantity" value="465">
-                                    </div>
-
-                                </form>
-                            </div>
-                            <div class="col-lg-4">
-                                <label for="product-stock" class="form-label">Tag</label>
-                                <select class="form-control" id="choices-multiple-remove-button" data-choices data-choices-removeItem name="choices-multiple-remove-button" multiple>
-                                    <option value="Fashion" selected>Fashion</option>
-                                    <option value="Electronics">Electronics</option>
-                                    <option value="Watches">Watches</option>
-                                    <option value="Headphones">Headphones</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Pricing Details</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <form>
-                                    <label for="product-price" class="form-label">Price</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text fs-20"><i class='bx bx-dollar'></i></span>
-                                        <input type="number" id="product-price" class="form-control" placeholder="000" value="80">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-lg-4">
-                                <form>
-                                    <label for="product-discount" class="form-label">Discount</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text fs-20"><i class='bx bxs-discount'></i></span>
-                                        <input type="number" id="product-discount" class="form-control" placeholder="000" value="30">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-lg-4">
-                                <form>
-                                    <label for="product-tex" class="form-label">Tex</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text fs-20"><i class='bx bxs-file-txt'></i></span>
-                                        <input type="number" id="product-tex" class="form-control" placeholder="000" value="3">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-3 bg-light mb-3 rounded">
-                    <div class="row justify-content-end g-2">
-                        <div class="col-lg-2">
-                            <a href="#!" class="btn btn-outline-secondary w-100">Reset</a>
-                        </div>
-                        <div class="col-lg-2">
-                            <a href="#!" class="btn btn-primary w-100">Save</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </form>
 
     </div>
     <!-- End Container Fluid -->
-
 </div>
-<?php include '../view/admin/layout/footer.php'; ?>
+<script>
+    document.getElementById('add-variant').addEventListener('click', function() {
+        const container = document.getElementById('variants');
+        const newVariant = document.createElement('div'); //tạo thẻ div mới
+        newVariant.innerHTML = `
+            <div class="row mb-4 border rounded px-3">
+                                <div class="col-lg-4">
+                                    <div class="mt-3">
+                                            <h5 class="text-dark fw-medium">Kích thước :</h5>
+                                            <div class="d-flex flex-wrap gap-2" role="group"
+                                                aria-label="Basic checkbox toggle button group">
+                                                <?php foreach ($listSize as $size) { ?>
+                                                    <input type="checkbox" class="btn-check" id="size-<?= $size['var_size_id'] ?>-${container.children.length}" name="variant_size[]" value="<?= $size['var_size_id'] ?>">
+                                                    <label
+                                                        class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center" style="width: 50px;"
+                                                        for="size-<?= $size['var_size_id'] ?>-${container.children.length}"><?= $size['name'] ?></label>
+                                                <?php } ?>
+                                            </div>
+                                            <?php if (isset($_SESSION['errors']['variant_size'])) { ?>
+                                                <p class="text-danger"><?= $_SESSION['errors']['variant_size'] ?></p>
+                                            <?php } ?>
+                                        </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="mt-3">
+                                        <h5 class="text-dark fw-medium">Màu sắc :</h5>
+                                        <div class="d-flex flex-wrap gap-2" role="group"
+                                            aria-label="Basic checkbox toggle button group">
+                                             <?php foreach ($listColor as $color) { ?>
+                                            <input type="checkbox" class="btn-check" id="color-<?= $color['var_color_id'] ?>-${container.children.length}" value="<?= $color['var_color_id'] ?>" name="variant_color[]">
+                                            <label
+                                                class="btn btn-light avatar-sm rounded d-flex justify-content-center align-items-center"
+                                                for="color-<?= $color['var_color_id'] ?>-${container.children.length}"> <i class="bx bxs-circle fs-18"  style="color: <?= $color['code'] ?>;"></i></label>
+                                                <?php } ?>
+                                            </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="mt-3 mb-3">
+                                        <label for="variant_price" class="form-label">Giá biến thể</label>
+                                        <input type="text" id="variant_price" class="form-control" name="variant_price[]"
+                                            placeholder="Nhập giá sản phẩm">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mt-3  mb-3">
+                                        <label for="variant_sale_price" class="form-label">Giá khuyến mãi biến thể</label>
+                                        <input type="text" id="variant_sale_price" class="form-control" name="variant_sale_price[]"
+                                            placeholder="Nhập giá khuyến mãi sản phẩm">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="mt-3  mb-3">
+                                        <label for="variant_quantity" class="form-label">Số lượng</label>
+                                        <input type="text" id="variant_quantity" class="form-control" name="variant_quantity[]"
+                                            placeholder="Nhập giá khuyến mãi sản phẩm">
+                                    </div>
+                                </div>
+
+                            </div>
+        `;
+        container.appendChild(newVariant); //thêm biến thể vào container
+    })
+</script>
+<?php
+unset($_SESSION['errors']);
+include '../view/admin/layout/footer.php'; ?>
