@@ -19,9 +19,11 @@ switch ($action) {
         $productAdmin->create();
         break;
     case 'product_edit':
-        include '../view/admin/product/edit.php';
+        $productAdmin->edit();
         break;
-
+    case 'product_update':
+        $productAdmin->update();
+        break;
         // ==================================================================================================//
 
     case 'category':
