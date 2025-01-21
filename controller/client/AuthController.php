@@ -59,7 +59,7 @@ class AuthController extends User
             $login = $this->login($_POST['email'], $_POST['password']);
             if ($login) {
                 $_SESSION['success'] = 'Đăng nhập thành công!';
-                header('Location: /duAnMot/YPhone8/public/');
+                header('Location: ?act=index');
                 exit();
             } else {
                 $_SESSION['error'] = 'Đăng nhập thất bại! Vui lòng kiểm tra lại';
@@ -71,5 +71,3 @@ class AuthController extends User
         include '../view/client/auth/login.php';
     }
 }
-
-?>
