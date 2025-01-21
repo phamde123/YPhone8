@@ -34,7 +34,7 @@
                     <div class="tp-login-wrapper">
                         <div class="tp-login-top text-center mb-30">
                             <h3 class="tp-login-title">Sign Up Shofy.</h3>
-                            <p>Already have an account? <span><a href="login.html">Sign In</a></span></p>
+                            <p>Already have an account? <span><a href="?act=login">Sign In</a></span></p>
                         </div>
                         <div class="tp-login-option">
                             <div class="tp-login-social mb-10 d-flex flex-wrap align-items-center justify-content-center">
@@ -58,26 +58,33 @@
                             <div class="tp-login-mail text-center mb-40">
                                 <p>or Sign up with <a href="#">Email</a></p>
                             </div>
+                            <form action="?act=register" method="post">
                             <div class="tp-login-input-wrapper">
                                 <div class="tp-login-input-box">
                                     <div class="tp-login-input">
-                                        <input id="name" type="text" placeholder="Shahnewaz Sakil">
+                                        <input id="name" name="name" type="text" placeholder="Nhập tên...">
                                     </div>
                                     <div class="tp-login-input-title">
-                                        <label for="name">Your Name</label>
+                                        <label for="name">Họ và tên</label>
                                     </div>
+                                    <?php if(isset($_SESSION['errors']['name'])): ?>
+                                        <p class="text-danger"><?= $_SESSION['errors']['name']?></p>
+                                        <?php endif; ?>
                                 </div>
                                 <div class="tp-login-input-box">
                                     <div class="tp-login-input">
-                                        <input id="email" type="email" placeholder="shofy@mail.com">
+                                        <input id="email" type="email" name="email" placeholder="Nhập Email">
                                     </div>
                                     <div class="tp-login-input-title">
-                                        <label for="email">Your Email</label>
+                                        <label for="email"> Email</label>
                                     </div>
+                                    <?php if(isset($_SESSION['errors']['email'])): ?>
+                                        <p class="text-danger"><?= $_SESSION['errors']['email']?></p>
+                                        <?php endif; ?>
                                 </div>
                                 <div class="tp-login-input-box">
                                     <div class="tp-login-input">
-                                        <input id="tp_password" type="password" placeholder="Min. 6 character">
+                                        <input id="tp_password" type="password" name="password" placeholder="Nhập Password">
                                     </div>
                                     <div class="tp-login-input-eye" id="password-show-toggle">
                                         <span id="open-eye" class="open-eye">
@@ -100,6 +107,9 @@
                                     <div class="tp-login-input-title">
                                         <label for="tp_password">Password</label>
                                     </div>
+                                    <?php if(isset($_SESSION['errors']['password'])): ?>
+                                        <p class="text-danger"><?= $_SESSION['errors']['password']?></p>
+                                        <?php endif; ?>
                                 </div>
                             </div>
                             <div class="tp-login-suggetions d-sm-flex align-items-center justify-content-between mb-20">
@@ -109,8 +119,9 @@
                                 </div>
                             </div>
                             <div class="tp-login-bottom">
-                                <a href="#" class="tp-login-btn w-100">Sign Up</a>
+                                <button name="register" href="#" class="tp-login-btn w-100">Sign Up</button>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -121,4 +132,7 @@
 
 </main>
 
-<?php include '../view/client/layout/footer.php'; ?>
+<?php 
+unset($_SESSION['errors']);
+include '../view/client/layout/footer.php'; 
+?>

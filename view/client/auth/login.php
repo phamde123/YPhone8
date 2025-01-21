@@ -58,18 +58,24 @@
                             <div class="tp-login-mail text-center mb-40">
                                 <p>or Sign in with <a href="#">Email</a></p>
                             </div>
+
+                            <form action="?act=login" method="post">
+
                             <div class="tp-login-input-wrapper">
                                 <div class="tp-login-input-box">
                                     <div class="tp-login-input">
-                                        <input id="email" type="email" placeholder="shofy@mail.com">
+                                        <input id="email" type="email" name="email" placeholder="Nhập email">
                                     </div>
                                     <div class="tp-login-input-title">
-                                        <label for="email">Your Email</label>
+                                        <label for="email"> Email</label>
                                     </div>
+                                    <?php if(isset($_SESSION['errors']['email'])): ?>
+                                        <p class="text-danger"><?= $_SESSION['errors']['email']?></p>
+                                        <?php endif; ?>
                                 </div>
                                 <div class="tp-login-input-box">
                                     <div class="tp-login-input">
-                                        <input id="tp_password" type="password" placeholder="Min. 6 character">
+                                        <input id="tp_password" name="password" type="password" placeholder="Nhập password">
                                     </div>
                                     <div class="tp-login-input-eye" id="password-show-toggle">
                                         <span id="open-eye" class="open-eye">
@@ -92,6 +98,9 @@
                                     <div class="tp-login-input-title">
                                         <label for="tp_password">Password</label>
                                     </div>
+                                    <?php if(isset($_SESSION['errors']['password'])): ?>
+                                        <p class="text-danger"><?= $_SESSION['errors']['password']?></p>
+                                        <?php endif; ?>
                                 </div>
                             </div>
                             <div class="tp-login-suggetions d-sm-flex align-items-center justify-content-between mb-20">
@@ -104,8 +113,9 @@
                                 </div>
                             </div>
                             <div class="tp-login-bottom">
-                                <a href="profile.html" class="tp-login-btn w-100">Login</a>
+                                <button type="submit" name="login" class="tp-login-btn w-100">Login</button>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
