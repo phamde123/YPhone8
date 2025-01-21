@@ -1,10 +1,15 @@
 <?php
 session_start();
+
 require_once '../controller/admin/CategoryAdminController.php';
 require_once '../controller/admin/ProductAdminController.php';
+require_once '../controller/client/AuthController.php';
+
 $action = isset($_GET['act']) ? $_GET['act'] : 'index';
 $categoryAdmin = new CategoryAdminController();
 $productAdmin = new ProductAdminController();
+$client = new AuthController();
+
 switch ($action) {
     case 'admin':
         include '../view/admin/index.php';
@@ -45,9 +50,9 @@ switch ($action) {
         include '../view/client/index.php';
         break;
     case 'login';
-        include '../view/client/auth/login.php';
+        $client->sigin();
         break;
     case 'register';
-        include '../view/client/auth/register.php';
+        $client->registers();
         break;
 }
