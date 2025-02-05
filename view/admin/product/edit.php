@@ -16,6 +16,7 @@
                                 <img src="./images/gallery_product/<?= $value['image'] ?>" alt="" width="150px">
                                 <input type="file" hidden name="old_gallery_image[]" value="<?= $value['image'] ?>" id="" class="form-control" multiple>
                             <?php } ?>
+                            <a class="btn btn-dark mb-3 float-end" href="index.php?act=delete_gallery&id=<?= $value['pro_id'] ?>" onclick="return confirm('Bạn có chắc chắn xóa ảnh sản phẩm không?')">Xóa ảnh sản phẩm</a>
                             <input type="file" name="gallery_image[]" id="" class="form-control" multiple>
                         </div>
                     </div>
@@ -87,6 +88,7 @@
                             <div id="variants">
                                 <?php foreach ($varients as $key => $value) { ?>
                                     <div class="row mb-4 border rounded px-3">
+                                    <a href="?act=delete_product_variant&variant_id=<?= $value['var_id'] ?>" class="d-flex justify-content-end mt-2"><i class='bx bx-x-circle bx-tada' ></i></a>
                                         <div class="col-lg-4">
                                             <div class="mt-3">
                                                 <input type="hidden" name="variant_id[]" value="<?= $value['var_id'] ?>" id="">
@@ -209,6 +211,7 @@
         const newVariant = document.createElement('div'); //tạo thẻ div mới
         newVariant.innerHTML = `
             <div class="row mb-4 border rounded px-3">
+            <a href="?act=delete_product_variant&variant_id=<?= $value['var_id'] ?>" class="d-flex justify-content-end mt-2"><i class='bx bx-x-circle bx-tada' ></i></a>
                                 <div class="col-lg-4">
                                     <div class="mt-3">
                                             <h5 class="text-dark fw-medium">Kích thước :</h5>
