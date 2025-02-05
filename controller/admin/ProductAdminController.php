@@ -110,7 +110,7 @@ class ProductAdminController extends Product
     {
         $product = $this->getProductId($_GET['id']);
         $varients = $this->getProductVariantId($_GET['id']);
-        $gallery = $this->getProductGalleryId($_GET['id']);
+        $gallery = $this->getProductGalleryId();
         $listCategory = $this->getAllCategory();
         $listColor = $this->getAllColer();
         $listSize = $this->getAllSize();
@@ -229,8 +229,61 @@ class ProductAdminController extends Product
             }
         }
     }
+
+    public function deleteGallery()
+    {
+        try {
+            $gallery = $this->getProductGalleryId();
+
+            foreach ($gallery as $image) {
+                if (file_exists('./images/gallery_product/' . $image['image'])) {
+                    unlink('./images/gallery_product/' . $image['image']);
+                }
+            }
+            $this->removeGallery($_GET['id']);
+            $_SESSION['success'] = 'Xóa ảnh sản phẩm thành công';
+            header("location:" . $_SERVER['HTTP_REFERER']);
+            exit();
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+            header('location:' . $_SERVER['HTTP_REFERER']);
+            exit();
+        }
+    }
+
+    public function deleteProductVariant()
+    {
+        try {
+            $this->removeProductVariant($_GET['variant_id']);
+            $_SESSION['success'] = 'Xóa biến thể sản phẩm thành công';
+            header("location:" . $_SERVER['HTTP_REFERER']);
+            exit();
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+            header('location:' . $_SERVER['HTTP_REFERER']);
+            exit();
+        }
+    }
+
+    public function deleteProduct() {
+        try {
+            $product = $this->getProductId($_GET['id']);
+            $galleries = $this->getProductGalleryId();
+            foreach ($galleries as $gallery) {
+                if (file_exists('./images/gallery_product/' . $gallery['image'])) {
+                    unlink('./images/gallery_product/' . $gallery['image']);
+                }
+            }
+            $this->removeProduct();
+            unlink('./images/product/' . $product['pro_image']);
+            $_SESSION['success'] = "Xóa sản phẩm thành công";
+            header("location:" . $_SERVER['HTTP_REFERER']);
+            exit();
+        } catch (\Throwable $th) {
+            $_SESSION['error'] = "Xóa phẩm thất bại.";
+            header("location:" . $_SERVER['HTTP_REFERER']);
+            exit();
+        }
+    }
 }
         
-// echo '<pre>';
-        // print_r($varients);
-        // echo '<pre>';

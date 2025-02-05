@@ -29,6 +29,15 @@ switch ($action) {
     case 'product_update':
         $productAdmin->update();
         break;
+    case 'delete_gallery':
+        $productAdmin->deleteGallery();
+        break;
+    case 'delete_product_variant':
+        $productAdmin->deleteProductVariant();
+        break;
+    case 'product_delete':
+        $productAdmin->deleteProduct();
+        break;
         // ==================================================================================================//
 
     case 'category':
@@ -46,7 +55,7 @@ switch ($action) {
 
         // ==================================================================================================//
 
-    case 'index';
+    case '  ';
         include '../view/client/index.php';
         break;
     case 'login';
