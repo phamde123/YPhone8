@@ -55,7 +55,7 @@ switch ($action) {
 
         // ==================================================================================================//
 
-    case '  ';
+    case 'index';
         include '../view/client/index.php';
         break;
     case 'login';
