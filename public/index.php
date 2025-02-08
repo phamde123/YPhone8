@@ -3,11 +3,14 @@ session_start();
 
 require_once '../controller/admin/CategoryAdminController.php';
 require_once '../controller/admin/ProductAdminController.php';
+require_once '../controller/client/HomeController.php';
 require_once '../controller/client/AuthController.php';
 
 $action = isset($_GET['act']) ? $_GET['act'] : 'index';
 $categoryAdmin = new CategoryAdminController();
 $productAdmin = new ProductAdminController();
+
+$home = new HomeCotroller();
 $client = new AuthController();
 
 switch ($action) {
@@ -56,7 +59,10 @@ switch ($action) {
         // ==================================================================================================//
 
     case 'index';
-        include '../view/client/index.php';
+        $home->index();
+        break;
+    case 'product_detail';
+        $home->getProductDetail();
         break;
     case 'login';
         $client->sigin();
