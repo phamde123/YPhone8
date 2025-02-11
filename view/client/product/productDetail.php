@@ -43,7 +43,7 @@
                             <div class="tab-content m-img" style="padding-left: 20%; padding-top: 5%;" id="productDetailsNavContent">
                                 <?php foreach ($productDetail['galleries'] as $key => $gallery) : ?>
                                     <div class="tab-pane fade show <?= $key === 0 ? 'active' : '' ?>" id="nav-<?= $key + 1 ?>" role="tabpanel" aria-labelledby="nav-<?= $key + 1 ?>-tab" tabindex="0">
-                                        <div class="tp-product-details-nav-main-thumb" >
+                                        <div class="tp-product-details-nav-main-thumb">
                                             <img src="./images/gallery_product/<?= $gallery ?>" alt="">
                                         </div>
                                     </div>
@@ -80,8 +80,9 @@
 
                             <!-- price -->
                             <div class="tp-product-details-price-wrapper mb-20">
-                                <span class="tp-product-details-price old-price">$<?= $productDetail['pro_price'] ?></span>
-                                <span class="tp-product-details-price new-price">$<?= $productDetail['pro_sale_price'] ?></span>
+                                <span class="tp-product-details-price old-price price-variants">$<?= $productDetail['pro_price'] ?></span>
+                                <span class="tp-product-details-price new-price sale-price-variants">$<?= $productDetail['pro_sale_price'] ?></span>
+                                <input type="hidden" name="variant_id" id="variant_id">
                             </div>
 
                             <!-- variations -->
@@ -91,7 +92,7 @@
                                     <h4 class="tp-product-details-variation-title">Color :</h4>
                                     <div class="tp-product-details-variation-list">
                                         <?php foreach ($productDetail['variant'] as $variant) : ?>
-                                            <button type="button" class="color tp-color-variation-btn">
+                                            <button type="button" class="color tp-color-variation-btn btn-color" data-color="<?= $variant['var_color_code'] ?>">
                                                 <span data-bg-color="<?= $variant['var_color_code'] ?>"></span>
                                                 <span class="tp-color-variation-tootltip"><?= $variant['var_color_name'] ?></span>
                                             </button>
@@ -104,7 +105,7 @@
                                     <h4 class="tp-product-details-variation-title">Size : S</h4>
                                     <div class="tp-product-details-variation-list">
                                         <?php foreach ($productDetail['variant'] as $variant) : ?>
-                                            <button type="button" class=" tp-size-variation-btn" style="margin: 5px;" data-width="60" data-height="60">
+                                            <button type="button" class=" tp-size-variation-btn btn-size" style="margin: 5px;" data-width="60" data-height="60" data-size="<?= $variant['var_size_name'] ?>">
                                                 <span><?= $variant['var_size_name'] ?></span>
                                             </button>
                                         <?php endforeach; ?>
@@ -114,7 +115,7 @@
 
                             <!-- actions -->
                             <div class="tp-product-details-action-wrapper">
-                                <h3 class="tp-product-details-action-title">Quantity</h3>
+                                <h3 class="tp-product-details-action-title quantity-variants">Quantity</h3>
                                 <div class="tp-product-details-action-item-wrapper d-flex align-items-center">
                                     <div class="tp-product-details-quantity">
                                         <div class="tp-product-quantity mb-15 mr-15">
@@ -409,4 +410,83 @@
     <!-- product details area end -->
 
 </main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let selectedSize = null;
+        let selectedColor = null;
+
+        // Lấy và truyền dữ liệu PHP sang JS
+        const variants = <?php echo json_encode($productDetail['variant']); ?>;
+        console.log(variants);
+        const colorButtons = document.querySelectorAll('.btn-color');
+        const sizeButtons = document.querySelectorAll('.btn-size');
+
+        // xử lý khi người dùng chọn màu
+        colorButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                selectedColor = button.getAttribute('data-color'); // Lấy mã màu
+                // console.log(selectedColor);
+                updateSize(); // Cập nhật kích thước khả dụng
+                checkPrice(); // Kiem tra giá
+            })
+        })
+
+        // xử lý khi người dùng chọn kích thước
+        sizeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                selectedSize = button.getAttribute('data-size'); // Lấy size
+                updateColor(); // Cập nhật mau khả dụng
+                checkPrice(); // Kiem tra giá
+            })
+        })
+
+        function checkPrice() {
+            if (selectedColor && selectedSize) {
+                const matchedVariant = variants.find(variant => variant.var_color_code === selectedColor && variant.var_size_name === selectedSize);
+                if (matchedVariant) {
+                    document.querySelector('.price-variants').textContent = matchedVariant.var_price;
+                    document.querySelector('.sale-price-variants').textContent = matchedVariant.var_sale_price;
+                    document.querySelector('.quantity-variants').textContent = `Quantity: ${ matchedVariant.var_quantity }`;
+                    document.getElementById('variant_id').value = matchedVariant.var_id;
+                } else {
+                    document.querySelector('.price-variants').textContent = '';
+                    document.querySelector('.sale-price-variants').textContent = '';
+                    document.querySelector('.quantity-variants').textContent = 0;
+                    document.getElementById('variant_id').value = '';
+                }
+            }
+        }
+
+        // cập nhật màu khả dụng
+        function updateColor() {
+            colorButtons.forEach(button => {
+                const color = button.getAttribute('data-color');
+                //kiểm tra kích thước đã chọn có màu khả dụng hay không
+                const isAvailable = variants.some(variant =>
+                    variant.var_color_code === color &&
+                    variant.var_size_name === selectedSize
+                );
+            })
+        }
+
+        // cập nhật kích thước khả dụng
+        function updateSize() {
+            sizeButtons.forEach(button => {
+                const size = button.getAttribute('data-size');
+                // kiểm tra màu khả dụng có kích thước khả dụng hay không
+                const isAvailable = variants.some(variant =>
+                    variant.var_color_code === selectedColor &&
+                    variant.var_size_name === size
+                );
+                button.disabled = !isAvailable; // Nếu có thì không cho chọn
+                if (!isAvailable) {
+                    button.classList.remove('selected'); // Nếu có sẵn thì thêm selected
+                }
+            });
+            selectedSize = null;
+        }
+    })
+</script>
+
 <?php include '../view/client/layout/footer.php'; ?>
