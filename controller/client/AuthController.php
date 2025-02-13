@@ -17,9 +17,9 @@ class AuthController extends User
                 $errors['password'] = 'Vui lòng nhập password có ít nhất 6 ký tự';
             }
 
-            $_SESSION['errors'] = $errors;
+            $_SESSION['errors'] = $errors; 
             if (count($errors) > 0) {
-                header('Location: ?act=register');
+                header('Location: ?act=register');  
                 exit();
             }
 
@@ -58,6 +58,7 @@ class AuthController extends User
 
             $login = $this->login($_POST['email'], $_POST['password']);
             if ($login) {
+                $_SESSION['user'] = $login; //lưu thông tin người dùng đăng nhập và session
                 $_SESSION['success'] = 'Đăng nhập thành công!';
                 header('Location: ?act=index');
                 exit();
