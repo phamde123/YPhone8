@@ -9,6 +9,7 @@ class ProductAdminController extends Product
         include '../view/admin/product/list.php';
     }
 
+    
     public function create()
     {
         $listColor = $this->getAllColer();

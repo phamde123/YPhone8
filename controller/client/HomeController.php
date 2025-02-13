@@ -3,9 +3,9 @@
 require_once '../model/Category.php';
 require_once '../model/Product.php';
 
-class HomeCotroller
+class HomeController
 {
-    protected $category;
+    protected $category; 
     protected $product;
 
     public function __construct()
