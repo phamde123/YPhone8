@@ -37,6 +37,10 @@ class AuthController extends User
         }
         include '../view/client/auth/register.php';
     }
+    public function logout(){
+        unset($_SESSION['user']);
+        include '../view/client/auth/login.php';
+    }
 
     public function sigin(): void
     {

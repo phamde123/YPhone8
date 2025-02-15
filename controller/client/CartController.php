@@ -20,7 +20,11 @@ class CartController extends Cart
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
                 exit();
             }
-
+            if (empty($_SESSION['user'])) {
+                $_SESSION['error'] = 'Bạn chưa đăng nhập. Vui lòng đăng nhập';
+                header('Location: index.php?act=login');
+                exit();
+            }
             $checkCart = $this->checkCart();
             if ($checkCart) {
                 $quantity = $checkCart['quantity'] + $_POST['quantity'];
@@ -39,6 +43,11 @@ class CartController extends Cart
             if (empty($_POST['variant_id'])) {
                 $_SESSION['error'] = 'Vui lọng chọn màu sắc, kích thước, số lượng sản phẩm';
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
+                exit();
+            }
+            if (empty($_SESSION['user'])) {
+                $_SESSION['error'] = 'Bạn chưa đăng nhập. Vui lòng đăng nhập';
+                header('Location: index.php?act=login');
                 exit();
             }
             $checkCart = $this->checkCart();
