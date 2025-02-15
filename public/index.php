@@ -80,7 +80,9 @@ switch ($action) {
     case 'register';
         $client->registers();
         break;
-
+    case 'logout';
+        $client->logout();
+        break;
     case 'profile':
         include "../view/client/profile/profile.php";
         break;
