@@ -66,4 +66,12 @@ class Cart extends connect
         $stmt = $this->connect()->prepare($sql);
         return $stmt->execute([$cart_id]);
     }
+
+    public function getCouponByCode($coupon_code) 
+    {
+        $sql = 'select * from coupons where coupon_code = ?';
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$coupon_code]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
