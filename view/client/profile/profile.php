@@ -177,24 +177,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-xxl-6 col-md-6">
-                                                        <div class="profile__input-box">
-                                                            <div class="profile__input">
-                                                                <input type="text" placeholder="Enter username" value="shahnewzname">
-                                                                <span>
-                                                                    <i class="fa-brands fa-facebook-f"></i>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xxl-6 col-md-6">
-                                                        <div class="profile__input-box">
-                                                            <div class="profile__input">
-                                                                <input type="text" placeholder="Enter username" value="shahnewzname">
-                                                                <span><i class="fa-brands fa-twitter"></i></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    
                                                     <div class="col-xxl-6 col-md-6">
                                                         <div class="profile__input-box">
                                                             <div class="profile__input">
@@ -216,9 +199,8 @@
                                                         <div class="profile__input-box">
                                                             <div class="profile__input">
                                                                 <select name="gender">
-                                                                    <option value="male" <?php $_SESSION['user']['gender'] == 'male' ? 'selected' : '' ?>>Male</option>
-                                                                    <option value="female" <?php $_SESSION['user']['gender'] == 'female' ? 'selected' : '' ?>>Female</option>
-                                                                    <option value="others" <?php $_SESSION['user']['gender'] == 'others' ? 'selected' : '' ?>>Others</option>
+                                                                    <option value="nam" <?php $_SESSION['user']['gender'] == 'nam' ? 'selected' : '' ?>>Nam</option>
+                                                                    <option value="nu" <?php $_SESSION['user']['gender'] == 'nu' ? 'selected' : '' ?>>Nu</option>
                                                                 </select>
                                                             </div>
                                                             <?php if (isset($_SESSION['errors']['gender'])) { ?>
@@ -239,14 +221,6 @@
                                                                 <?php if (isset($_SESSION['errors']['address'])) { ?>
                                                                     <p class="text-danger"><?= $_SESSION['errors']['address'] ?></p>
                                                                 <?php } ?>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-xxl-12">
-                                                        <div class="profile__input-box">
-                                                            <div class="profile__input">
-                                                                <textarea placeholder="Enter your bio">Hi there, this is my bio...</textarea>
                                                             </div>
                                                         </div>
                                                     </div>

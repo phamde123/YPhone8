@@ -17,9 +17,11 @@ class Cart extends connect
         $sql = 'select 
                 cart.cart_id as cart_id,
                 cart.quantity as cart_quantity,
+                products.pro_id as pro_id,
                 products.name as pro_name,
                 products.slug as pro_slug,
                 products.image as pro_image,
+                product_variants.var_id as var_id,
                 product_variants.price as var_price,
                 product_variants.sale_price as var_sale_price,
                 variant_color.name as color_name,
