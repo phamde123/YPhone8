@@ -3,23 +3,24 @@ session_start();
 
 require_once '../controller/admin/CategoryAdminController.php';
 require_once '../controller/admin/ProductAdminController.php';
+require_once '../controller/admin/CouponAdminController.php';
+
+
 require_once '../controller/client/HomeController.php';
 require_once '../controller/client/AuthController.php';
-
 require_once  '../controller/client/ProfileController.php';
-
 require_once '../controller/client/CartController.php';
 
 
 $action = isset($_GET['act']) ? $_GET['act'] : 'index';
 $categoryAdmin = new CategoryAdminController();
 $productAdmin = new ProductAdminController();
+$couponAdmin = new CouponAdminController();
+
 
 $home = new HomeController();
 $client = new AuthController();
-
 $profile = new ProfileController();
-
 $cart = new CartController();
 
 
@@ -68,11 +69,31 @@ switch ($action) {
 
         // ==================================================================================================//
 
+    case 'coupon':
+        $couponAdmin->index();
+        break;
+    case 'coupon-create':
+        $couponAdmin->create();
+        break;
+    case 'coupon-edit':
+        $couponAdmin->edit();
+        break;
+    case 'coupon-update':
+        $couponAdmin->update();
+        break;
+    case 'coupon-delete':
+        $couponAdmin->delete();
+        break;
+
+        // ==================================================================================================//
+
     case 'index';
         $home->index();
         break;
     case 'product_detail';
         $home->getProductDetail();
+
+
         break;
     case 'login';
         $client->sigin();
@@ -83,11 +104,15 @@ switch ($action) {
     case 'logout';
         $client->logout();
         break;
+
+
     case 'profile':
         include "../view/client/profile/profile.php";
         break;
     case 'update-profile':
         $profile->updateProfile();
+
+
 
     case 'cart';
         $cart->index();

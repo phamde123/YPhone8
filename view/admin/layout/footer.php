@@ -3,6 +3,7 @@
 <!-- App Javascript (Require in all Page) -->
 <script src="admin/assets_admin/js/app.js"></script>
 
+
 <!-- Vector Map Js -->
 <script src="admin/assets_admin/vendor/jsvectormap/js/jsvectormap.min.js"></script>
 <script src="admin/assets_admin/vendor/jsvectormap/maps/world-merc.js"></script>

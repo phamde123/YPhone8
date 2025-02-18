@@ -90,8 +90,8 @@
                               <div class="tp-cart-coupon-input-box">
                                  <label>Coupon Code:</label>
                                  <div class="tp-cart-coupon-input d-flex align-items-center">
-                                    <input type="text" placeholder="Enter Coupon Code">
-                                    <button type="submit">Apply</button>
+                                    <input type="text" name="coupon_code" placeholder="Enter Coupon Code">
+                                    <button type="submit" name="apply">Apply</button>
                                  </div>
                               </div>
                            </form>
@@ -113,6 +113,10 @@
                      <span class="tp-cart-checkout-top-title">Tổng tiền</span>
                      <span class="tp-cart-checkout-top-price">$<?= $sum ?></span>
                   </div>
+                  <div class="tp-cart-checkout-top d-flex align-items-center justify-content-between">
+                     <span class="tp-cart-checkout-top-title">Giá giảm</span>
+                     <span class="tp-cart-checkout-top-price">$<?= $_SESSION['totalCoupon'] ?></span>
+                  </div>
                   <!-- <div class="tp-cart-checkout-shipping">
                      <h4 class="tp-cart-checkout-shipping-title">Shipping</h4>
 
@@ -133,7 +137,7 @@
                   </div> -->
                   <div class="tp-cart-checkout-total d-flex align-items-center justify-content-between">
                      <span>Thành tiền</span>
-                     <span>$<?= $sum ?></span>
+                     <span>$<?= $sum - $_SESSION['totalCoupon'] ?></span>
                   </div>
                   <div class="tp-cart-checkout-proceed">
                      <a href="checkout.html" class="tp-cart-checkout-btn w-100">Proceed to Checkout</a>
