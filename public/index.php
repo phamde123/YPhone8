@@ -4,6 +4,7 @@ session_start();
 require_once '../controller/admin/CategoryAdminController.php';
 require_once '../controller/admin/ProductAdminController.php';
 require_once '../controller/admin/CouponAdminController.php';
+require_once '../controller/admin/OrderAdminController.php';
 
 
 require_once '../controller/client/HomeController.php';
@@ -17,7 +18,7 @@ $action = isset($_GET['act']) ? $_GET['act'] : 'index';
 $categoryAdmin = new CategoryAdminController();
 $productAdmin = new ProductAdminController();
 $couponAdmin = new CouponAdminController();
-
+$orderAdmin = new OrderAdminController();
 
 $home = new HomeController();
 $client = new AuthController();
@@ -53,6 +54,19 @@ switch ($action) {
     case 'product_delete':
         $productAdmin->deleteProduct();
         break;
+    case 'orders-list':
+        $orderAdmin->list();
+        break;
+    case 'orders-edit':
+        $orderAdmin->edit();
+        break;
+    case 'order-update':
+        $orderAdmin->update();
+        break;
+    case 'orders-delete':
+        $orderAdmin->delete();
+        break;
+
         // ==================================================================================================//
 
     case 'category':
