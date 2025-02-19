@@ -94,7 +94,7 @@
                                         <li class="tp-order-info-list-subtotal">
                                             <span>Coupon</span>
                                             <span>- $<?= $_SESSION['totalCoupon'] ?></span>
-                                            <input type="hidden" name="cou_id" id="" value="<?= $_SESSION['coupon']['cou_id'] ?>">
+                                            <input type="hidden" name="cou_id" id="" value="<?= $_SESSION['coupon']['cou_id']?>">
                                         </li>
                                     <?php } ?>
 
@@ -103,10 +103,10 @@
                                     <li class="tp-order-info-list-shipping">
                                         <span>Shipping</span>
                                         <div class="tp-order-info-list-shipping-item d-flex flex-column align-items-end">
-                                            <?php foreach ($ships as $ship) { ?>
+                                            <?php foreach ($ships as    $key => $ship) { ?>
                                                 <span>
-                                                    <input id="flat_rate" type="radio" name="shipping" value="<?= $ship['ship_id'] ?>">
-                                                    <label for="flat_rate"><?= $ship['name'] ?> <span>$<?= $ship['price'] ?></span></label>
+                                                    <input id="flat_rate_<?= $key + 1 ?>" type="radio" name="shipping" value="<?= $ship['ship_id'] ?>">
+                                                    <label for="flat_rate_<?= $key + 1 ?>"><?= $ship['name'] ?> <span>$<?= $ship['price'] ?></span></label>
                                                 </span>
                                             <?php } ?>
 
