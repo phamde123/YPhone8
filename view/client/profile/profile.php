@@ -51,7 +51,6 @@ include '../view/client/layout/header.php';
                                                         </div>
                                                         <div class="profile__main-content">
                                                             <h4 class="profile__main-title">Welcome <?= $_SESSION['user']['name'] ?></h4>
-                                                            <p>You have <span>08</span> notifications</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -141,7 +140,7 @@ include '../view/client/layout/header.php';
                                 </div>
                                 <div class="tab-pane fade" id="nav-information" role="tabpanel" aria-labelledby="nav-information-tab">
                                     <div class="profile__info">
-                                        <h3 class="profile__info-title">Personal Details</h3>
+                                        <h3 class="profile__info-title">Chi tiết người dùng</h3>
                                         <div class="profile__info-content">
                                             <form action="?act=update-profile" method="post">
                                                 <div class="row">
@@ -313,7 +312,7 @@ include '../view/client/layout/header.php';
                                         </form>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
+                                <!-- <div class="tab-pane fade" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
                                     <div class="profile__address">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -375,7 +374,7 @@ include '../view/client/layout/header.php';
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="tab-pane fade" id="nav-order" role="tabpanel" aria-labelledby="nav-order-tab">
                                     <div class="profile__ticket table-responsive">
                                         <table class="table">
@@ -422,7 +421,7 @@ include '../view/client/layout/header.php';
                                         </table>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="nav-notification" role="tabpanel" aria-labelledby="nav-notification-tab">
+                                <!-- <div class="tab-pane fade" id="nav-notification" role="tabpanel" aria-labelledby="nav-notification-tab">
                                     <div class="profile__notification">
                                         <div class="profile__notification-top mb-30">
                                             <h3 class="profile__notification-title">My activity settings</h3>
@@ -461,7 +460,7 @@ include '../view/client/layout/header.php';
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
