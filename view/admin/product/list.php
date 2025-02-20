@@ -71,7 +71,7 @@
                                             <td>
                                                 <div class="d-flex gap-2">
                                                     <a href="?act=product_edit&id=<?= $product['pro_id'] ?>" class="btn btn-soft-primary btn-sm"><iconify-icon icon="solar:pen-2-broken" class="align-middle fs-18"></iconify-icon></a>
-                                                    <a href="?act=product_delete&id=<?= $product['pro_id'] ?>" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
+                                                    <a href="?act=product_delete&id=<?= $product['pro_id'] ?>" onclick="return confirm('Bạn có muốn xóa sản phẩm không?')" class="btn btn-soft-danger btn-sm"><iconify-icon icon="solar:trash-bin-minimalistic-2-broken" class="align-middle fs-18"></iconify-icon></a>
                                                 </div>
                                             </td>
                                         </tr>

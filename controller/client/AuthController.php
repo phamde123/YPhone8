@@ -37,6 +37,10 @@ class AuthController extends User
         }
         include '../view/client/auth/register.php';
     }
+    public function logout(){
+        unset($_SESSION['user']);
+        include '../view/client/auth/login.php';
+    }
 
     public function sigin(): void
     {
@@ -101,9 +105,7 @@ class AuthController extends User
             }
 
             $changePass = $this->updatePassword(newPassword: $_POST['new_pass']);
-            echo '<pre>';
-            print_r($changePass);
-            die;
+           
             if ($changePass) {
                 $_SESSION['success'] = 'Cập nhật mật khẩu thành công';
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
@@ -116,11 +118,5 @@ class AuthController extends User
         }
     }
 
-    public function logout(): never
-    {
-        unset($_SESSION['user']);
-        $_SESSION['success'] = 'Đăng xuất thành công';
-        header('Location:  ?act=login');
-        exit();
-    }
+    
 }

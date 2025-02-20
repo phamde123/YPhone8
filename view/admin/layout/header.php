@@ -564,20 +564,29 @@
                             <ul class="nav sub-navbar-nav">
 
                                 <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="orders-list.html">List</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="order-detail.html">Details</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="order-cart.html">Cart</a>
-                                </li>
-                                <li class="sub-nav-item">
-                                    <a class="sub-nav-link" href="order-checkout.html">Check Out</a>
+                                    <a class="sub-nav-link" href="?act=orders-list">List</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
+                    <li class="nav-item">
+                              <a class="nav-link menu-arrow" href="#sidebarCoupons" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarCoupons">
+                                   <span class="nav-icon">
+                                        <iconify-icon icon="solar:leaf-bold-duotone"></iconify-icon>
+                                   </span>
+                                   <span class="nav-text"> Coupons </span>
+                              </a>
+                              <div class="collapse" id="sidebarCoupons">
+                                   <ul class="nav sub-navbar-nav">
+                                        <li class="sub-nav-item">
+                                             <a class="sub-nav-link" href="index.php?act=coupon">List</a>
+                                        </li>
+                                        <li class="sub-nav-item">
+                                             <a class="sub-nav-link" href="index.php?act=coupon-create">Add</a>
+                                        </li>
+                                   </ul>
+                              </div>
+                         </li>
 
             </div>
         </div>
