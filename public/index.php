@@ -26,6 +26,7 @@ $profile = new ProfileController();
 $cart = new CartController();
 $order = new OrdertController();
 
+
 switch ($action) {
     case 'admin':
         include '../view/admin/index.php';
@@ -147,5 +148,10 @@ switch ($action) {
         break;
     case 'order':
         $order->order();
+        break;
+    case 'logout':
+        $client->logout();
+    case 'change-password':
+        $client->changePassword();
         break;
 }

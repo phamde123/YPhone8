@@ -1,4 +1,5 @@
-<?php include '../view/client/layout/header.php';
+<?php
+include '../view/client/layout/header.php';
 
 ?>
 
@@ -50,13 +51,12 @@
                                                         </div>
                                                         <div class="profile__main-content">
                                                             <h4 class="profile__main-title">Welcome <?= $_SESSION['user']['name'] ?></h4>
-                                                            <p>You have <span>08</span> notifications</p>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="profile__main-logout text-sm-end">
-                                                        <a href="login.html" class="tp-logout-btn">Logout</a>
+                                                        <a href="?act=logout" class="tp-logout-btn">Logout</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -140,7 +140,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="nav-information" role="tabpanel" aria-labelledby="nav-information-tab">
                                     <div class="profile__info">
-                                        <h3 class="profile__info-title">Personal Details</h3>
+                                        <h3 class="profile__info-title">Chi tiết người dùng</h3>
                                         <div class="profile__info-content">
                                             <form action="?act=update-profile" method="post">
                                                 <div class="row">
@@ -236,13 +236,16 @@
                                 </div>
                                 <div class="tab-pane fade" id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab">
                                     <div class="profile__password">
-                                        <form action="#">
+                                        <form action="?act=change-password" method="post">
                                             <div class="row">
                                                 <div class="col-xxl-12">
                                                     <div class="tp-profile-input-box">
                                                         <div class="tp-contact-input">
                                                             <input name="old_pass" id="old_pass" type="password">
                                                         </div>
+                                                        <?php if (isset($_SESSION['errors']['old_pass'])) { ?>
+                                                            <p class="text-danger"><?= $_SESSION['errors']['old_pass'] ?></p>
+                                                        <?php } ?>
                                                         <div class="tp-profile-input-title">
                                                             <label for="old_pass">Old Password</label>
                                                         </div>
@@ -253,6 +256,9 @@
                                                         <div class="tp-profile-input">
                                                             <input name="new_pass" id="new_pass" type="password">
                                                         </div>
+                                                        <?php if (isset($_SESSION['errors']['new_pass'])) { ?>
+                                                            <p class="text-danger"><?= $_SESSION['errors']['new_pass'] ?></p>
+                                                        <?php } ?>
                                                         <div class="tp-profile-input-title">
                                                             <label for="new_pass">New Password</label>
                                                         </div>
@@ -263,6 +269,9 @@
                                                         <div class="tp-profile-input">
                                                             <input name="con_new_pass" id="con_new_pass" type="password">
                                                         </div>
+                                                        <?php if (isset($_SESSION['errors']['con_new_pass'])) { ?>
+                                                            <p class="text-danger"><?= $_SESSION['errors']['con_new_pass'] ?></p>
+                                                        <?php } ?>
                                                         <div class="tp-profile-input-title">
                                                             <label for="con_new_pass">Confirm Password</label>
                                                         </div>
@@ -270,14 +279,14 @@
                                                 </div>
                                                 <div class="col-xxl-6 col-md-6">
                                                     <div class="profile__btn">
-                                                        <button type="submit" class="tp-btn">Update</button>
+                                                        <button type="submit" name="change-password" class="tp-btn">Update</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
+                                <!-- <div class="tab-pane fade" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
                                     <div class="profile__address">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -339,7 +348,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="tab-pane fade" id="nav-order" role="tabpanel" aria-labelledby="nav-order-tab">
                                     <div class="profile__ticket table-responsive">
                                         <table class="table">
@@ -386,7 +395,7 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="nav-notification" role="tabpanel" aria-labelledby="nav-notification-tab">
+                                <!-- <div class="tab-pane fade" id="nav-notification" role="tabpanel" aria-labelledby="nav-notification-tab">
                                     <div class="profile__notification">
                                         <div class="profile__notification-top mb-30">
                                             <h3 class="profile__notification-title">My activity settings</h3>
@@ -425,7 +434,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
