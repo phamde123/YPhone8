@@ -38,4 +38,20 @@ class User extends connect
         $stmt->execute([$id]);
         return $stmt->fetch();
     }
+
+    public function updatePassword($newPassword): bool
+    {
+        $hash_password = password_hash($newPassword, PASSWORD_DEFAULT);
+        $sql = 'UPDATE user SET pass=? WHERE user_id=?'; // Sửa 'password' thành 'pass' (nếu đúng tên cột)
+        $stmt = $this->connect()->prepare($sql);
+        return $stmt->execute([$hash_password, $_SESSION['user']['user_id']]);
+    }
+
+    public function getPassword(): mixed
+    {
+        $sql = 'select pass from user where user_id = ?';
+        $stmt = $this->connect()->prepare(query: $sql);
+        $stmt->execute(params: [$_SESSION['user']['user_id']]);
+        return $stmt->fetchColumn();
+    }
 }

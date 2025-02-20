@@ -13,6 +13,8 @@ $productAdmin = new ProductAdminController();
 $home = new HomeController();
 $client = new AuthController();
 $profile = new ProfileController();
+$auth = new AuthController();
+
 switch ($action) {
     case 'admin':
         include '../view/admin/index.php';
@@ -75,5 +77,10 @@ switch ($action) {
         break;
     case 'update-profile':
         $profile->updateProfile();
+        break;
+    case 'logout':
+        $client->logout();
+    case 'change-password':
+        $auth->changePassword();
         break;
 }
