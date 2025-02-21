@@ -54,4 +54,17 @@ class User extends connect
         $stmt->execute(params: [$_SESSION['user']['user_id']]);
         return $stmt->fetchColumn();
     }
+
+    public function auth($email, $password): mixed
+    {
+        $sql = 'SELECT * FROM user WHERE email = ?';
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
+
+        if ($user && $user['role_id'] == 1 && password_verify($password, $user['pass'])) {
+            return $user;
+        }
+        return false;
+    }
 }
