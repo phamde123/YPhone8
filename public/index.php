@@ -141,10 +141,17 @@ switch ($action) {
 
 
     case 'profile':
-        include "../view/client/profile/profile.php";
+        $profile->index();
         break;
     case 'update-profile':
         $profile->updateProfile();
+        break;
+    case 'trash-order':
+        $profile->trashOrder();
+        break;
+    case 'cancel-order':
+        $profile->cancelOrder();
+        break;
 
 
 
@@ -167,6 +174,7 @@ switch ($action) {
     case 'order':
         $order->order();
         break;
+
     case 'change-password':
         $client->changePassword();
         break;
