@@ -127,4 +127,19 @@ class Order extends connect
         $stmt = $this->connect()->prepare($sql);
         return $stmt->execute([$_GET['detail_id']]);
     }
+
+    public function getOrderDetailByUserId()
+    {
+        $sql = 'select * from order_details where user_id = ?';
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$_SESSION["user"]["user_id"]]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function cancel()
+    {
+        $sql = 'UPDATE order_details SET status="Canceled", updated_at= now()  WHERE detail_id= ? ';
+        $stmt = $this->connect()->prepare($sql);
+        return $stmt->execute([$_GET['detail_id']]);
+    }
 }
