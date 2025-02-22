@@ -5,6 +5,7 @@ require_once '../controller/admin/CategoryAdminController.php';
 require_once '../controller/admin/ProductAdminController.php';
 require_once '../controller/admin/CouponAdminController.php';
 require_once '../controller/admin/OrderAdminController.php';
+require_once '../controller/admin/AuthAdminController.php';
 
 
 require_once '../controller/client/HomeController.php';
@@ -21,6 +22,7 @@ $couponAdmin = new CouponAdminController();
 $orderAdmin = new OrderAdminController();
 
 $home = new HomeController();
+$authAdmin = new AuthAdminController();
 $client = new AuthController();
 $profile = new ProfileController();
 $cart = new CartController();
@@ -28,43 +30,59 @@ $order = new OrdertController();
 
 
 switch ($action) {
+    case 'auth':
+        $authAdmin->singin();
+        break;
     case 'admin':
+        $authAdmin->middleware();
         include '../view/admin/index.php';
         break;
     case 'product':
+        $authAdmin->middleware();
         $productAdmin->index();
         break;
     case 'product_store':
+        $authAdmin->middleware();
         $productAdmin->store();
         break;
     case 'product_create':
+        $authAdmin->middleware();
         $productAdmin->create();
         break;
     case 'product_edit':
+        $authAdmin->middleware();
         $productAdmin->edit();
         break;
     case 'product_update':
+        $authAdmin->middleware();
         $productAdmin->update();
         break;
     case 'delete_gallery':
+        $authAdmin->middleware();
         $productAdmin->deleteGallery();
         break;
     case 'delete_product_variant':
+        $authAdmin->middleware();
         $productAdmin->deleteProductVariant();
         break;
     case 'product_delete':
+        $authAdmin->middleware();
         $productAdmin->deleteProduct();
         break;
     case 'orders-list':
+        $authAdmin->middleware();
         $orderAdmin->list();
         break;
     case 'orders-edit':
+        $authAdmin->middleware();
         $orderAdmin->edit();
         break;
     case 'order-update':
+        $authAdmin->middleware();
         $orderAdmin->update();
         break;
     case 'orders-delete':
+        $authAdmin->middleware();
         $orderAdmin->delete();
         break;
 
@@ -157,11 +175,6 @@ switch ($action) {
         $order->order();
         break;
 
-
-
-
-    case 'logout':
-        $client->logout();
     case 'change-password':
         $client->changePassword();
         break;
