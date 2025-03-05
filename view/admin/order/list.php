@@ -30,12 +30,12 @@
                             <table class="table align-middle mb-0 table-hover table-centered">
                                 <thead class="bg-light-subtle">
                                     <tr>
-                                        <th>Order ID</th>
-                                        <th>Created at</th>
-                                        <th>Name</th>
-                                        <th>Status</th>
-                                        <th>Total</th>
-                                        <th>Action</th>
+                                        <th>ID đơn hàng</th>
+                                        <th>Ngày mua hàng</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Trạng thái</th>
+                                        <th>Tổng tiền</th>
+                                        <th>Thao tác</th>
                                     </tr>
                                 </thead>
                                 <tbody>

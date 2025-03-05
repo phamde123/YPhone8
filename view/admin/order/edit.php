@@ -18,13 +18,13 @@
                                 <form action="?act=order-update&detail_id=<?= $getOrderDetail['detail_id'] ?>" method="post">
                                     <div class="d-flex flex-wrap align-items-center gap-2 mb-3 mt-3">
                                         <select name="status" id="" class="form-select order-edit">
-                                            <option value="Pending" <?= $getOrderDetail['status'] == 'Pending' ? 'selected' : '' ?>>Pending</option>
-                                            <option value="Confirmend" <?= $getOrderDetail['status'] == 'Confirmend' ? 'selected' : '' ?>>Confirmend</option>
-                                            <option value="Shipped" <?= $getOrderDetail['status'] == 'Shipped' ? 'selected' : '' ?>>Shipped</option>
-                                            <option value="Delivered" <?= $getOrderDetail['status'] == 'Delivered' ? 'selected' : '' ?>>Delivered</option>
-                                            <option value="Canceled" <?= $getOrderDetail['status'] == 'Canceled' ? 'selected' : '' ?>>Canceled</option>
+                                            <option value="Pending" <?= $getOrderDetail['status'] == 'Pending' ? 'selected' : '' ?>>Chờ xác nhận</option>
+                                            <option value="Confirmend" <?= $getOrderDetail['status'] == 'Confirmend' ? 'selected' : '' ?>>Đã xác nhận</option>
+                                            <option value="Shipped" <?= $getOrderDetail['status'] == 'Shipped' ? 'selected' : '' ?>>Đang vận chuyển</option>
+                                            <option value="Delivered" <?= $getOrderDetail['status'] == 'Delivered' ? 'selected' : '' ?>>Đã giao hàng</option>
+                                            <option value="Canceled" <?= $getOrderDetail['status'] == 'Canceled' ? 'selected' : '' ?>>Hủy đơn</option>
                                         </select>
-                                        <button type="submit" name="updateOrder" class="btn btn-primary">Edit Order</b>
+                                        <button type="submit" name="updateOrder" class="btn btn-primary">Cập nhập</b>
                                     </div>
                                 </form>
                             </div>
