@@ -87,10 +87,7 @@
                                         </div>
                                     </form>
 
-                                   
                                 </div>
-
-                                <p class="text-danger text-center">Don't have an account? <a href="auth-signup.html" class="text-dark fw-bold ms-1">Sign Up</a></p>
                             </div>
                         </div>
                     </div>

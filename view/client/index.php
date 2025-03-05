@@ -160,7 +160,6 @@
                                 <h3 class="tp-product-category-title">
                                     <a href="shop-category.html"><?= $cate['name'] ?></a>
                                 </h3>
-                                <p>20 Product</p>
                             </div>
                         </div>
                     </div>

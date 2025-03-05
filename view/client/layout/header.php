@@ -99,7 +99,7 @@
             <div class="offcanvas__content">
                 <div class="offcanvas__top mb-70 d-flex justify-content-between align-items-center">
                     <div class="offcanvas__logo logo">
-                        <a href="?act=index">
+                        <a href="./">
                             <img src="client/assets/img/logo/logo.svg" alt="logo">
                         </a>
                     </div>
@@ -683,7 +683,7 @@
                                     <nav class="tp-main-menu-content">
                                         <ul>
                                             <li class="has-dropdown has-mega-menu">
-                                                <a href="index.php">Home</a>
+                                                <a href="index.php">Trang chủ</a>
                                                 <!-- <div class="home-menu tp-submenu tp-mega-menu">
                                                     <div class="row row-cols-1 row-cols-lg-4 row-cols-xl-5">
                                                         <div class="col">
@@ -753,9 +753,9 @@
                                                 <a href="shop.html">Shop</a>
                                             </li>
                                             <li class="has-dropdown has-mega-menu ">
-                                                <a href="shop.html">Products</a>
+                                                <a href="shop.html">Sản phẩm</a>
                                             </li>
-                                            <li><a href="coupon.html">Coupons</a></li>
+                                            <li><a href="coupon.html">Mã giảm giá</a></li>
                                             <li><a href="contact.html">Contact</a></li>
                                         </ul>
                                     </nav>
@@ -802,7 +802,7 @@
                             <nav id="mobile-menu">
                                 <ul>
                                     <li class="has-dropdown has-mega-menu">
-                                        <a href="index.php">Home</a>
+                                        <a href="index.php">Trang chủ</a>
                                         
                                     </li>
                                     <li class="has-dropdown has-mega-menu">
@@ -811,10 +811,10 @@
                                     </li>
                                     <li class="has-dropdown has-mega-menu ">
 
-                                        <a href="shop.html">Products</a>
+                                        <a href="shop.html">Sản phẩm</a>
                                         
                                     </li>
-                                    <li><a href="coupon.html">Coupons</a></li>
+                                    <li><a href="coupon.html">Mã giảm giá</a></li>
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
                             </nav>
